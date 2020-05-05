@@ -1,0 +1,149 @@
+{% extends "layout.html" %}
+{% block title %}
+book
+{% endblock %}
+
+
+
+    <!-- book info table -->
+{% block main %}
+
+    {%if dbdata %}
+
+    <table class="table table-bordered table-dark">
+    <thead>
+
+      <tr class="text2">
+        <th scope="col">Title</th>
+        <th scope="col">Author</th>
+        <th scope="col">Year</th>
+        <th scope="col">isbn</th>
+        <th scope="col">Total Reviews</th>
+        <th scope="col">Total Rating</th>
+        <th scope="col">Average Rating</th>
+      </tr>
+    </thead>
+    <tbody>
+      {%for i in dbdata%}
+      <tr class="text2">
+        <th class="bg-success">{{i[2]}}</th>
+        <td class="bg-success">{{i[3]}}</td>
+        <td class="bg-success">{{i[4]}}</td>
+        <td class="bg-success">{{i[1]}}</td>
+        <td class="bg-success">{{apidata['books'][0]['work_reviews_count']}}</td>
+        <td class="bg-success">{{apidata['books'][0]['work_ratings_count']}}</td>
+        <td class="bg-success">{{apidata['books'][0]['average_rating']}}</td>
+      </tr>
+      {%endfor%}
+    </tbody>
+  </table>
+  {%endif%}
+
+  
+
+
+
+    {%for i in dbdata%}
+<div class="container-fluid">
+    <div class="text2 row">
+      <div class="col-12">
+          <h2 class="text1">Did you read this book? Leave a review</h2>
+        </div>
+      </div>
+    </div>
+    {%endfor%}
+
+<form action="{{  url_for('singleBook', isbn= isbn )  }}" method="POST" class="review-form" id="reviewForm">
+  <table class="table">
+    <tr>
+      <td class="text">ISBN</td>
+        <td>
+          {%for i in dbdata %}
+          <input type="text"class="form-control disabled" name="isbn" value="{{i[1]}}" readonly/>
+          {%endfor%}
+        </td>
+    </tr>
+    <tr>
+      <td class="text">Comment</td>
+        <td>
+          <div class="comment">
+              <textarea placeholder="Write your comment here" class="form-control" name="comment" rows="3"></textarea>
+          </div>
+        </td>
+    </tr>
+    <tr>
+      <td class="text">Rating</td>
+        <td>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="rating" id="inlineRadio1" value="1">
+            <label class="text form-check-label" for="inlineRadio1">1</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="rating" id="inlineRadio2" value="2">
+            <label class="text form-check-label" for="inlineRadio2">2</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="rating" id="inlineRadio3" value="3">
+            <label class="text form-check-label" for="inlineRadio3">3</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="rating" id="inlineRadio3" value="4">
+            <label class="text form-check-label" for="inlineRadio3">4</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="rating" id="inlineRadio3" value="5"> 
+            <label class="text form-check-label" for="inlineRadio3">5</label>
+          </div>
+        </td>
+    </tr>
+  </table>
+      <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
+</form>
+</div>
+  {{dbemail}}
+</div>
+
+<!-- reviews section -->
+<div class="row mt-5">
+  <div class="col-sm-12 col-md-7">
+    <h2 class="text">Reviews</h2>
+    {%if dbreviews %} {%for i in dbreviews %}
+
+<table class="table table-bordered table-dark">
+  <thead>
+    <tr class="text2">
+      <th scope="col">Name</th>
+      <th scope="col">Rating</th>
+      <th scope="col">Date</th>
+      <th scope="col">Comment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="text2">
+      <th class="bg-success">{{i[0]}}</th>
+      <td class="bg-success">{{i[1]}}</td>
+      <td class="bg-success">{{ i[4].strftime("%d %B, %Y") }}</td>
+      <td class="bg-success">{{i[2]}}</td>
+    </tr>
+  </tbody>
+</table>
+    {%endfor%} {%else %}
+
+  
+    {%endif%}
+  </div>
+</div>
+{% endblock %}
+
+ 
+   
+<div class="review-content">
+  <span>Name:</span>
+  <span> {{i[0]}} </span>
+  <span> Rating: </span>
+  <span> {{i[1]}} </span>
+  <span>Date: </span>
+  <span> {{ i[4].strftime("%d %B, %Y") }} </span>
+  <span>Comment:</span>
+  <span> {{i[2]}} </span>
+</div>

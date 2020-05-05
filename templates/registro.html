@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Registro
+{% endblock %}
+
+{% block main %}
+  <form action="/add_contact" method="POST">
+    <div class="form-group row">
+        <label for="inputEmail3" class="text col-sm-2 col-form-label">Name</label>
+        <div class="col-sm-10">
+          <input type="text" name="name" placeholder="Name" class="form-control" id="inputEmail3">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputEmail3" class="text col-sm-2 col-form-label">Last Name</label>
+        <div class="col-sm-10">
+          <input type="text" name="lastname" placeholder="Last Name"class="form-control" id="inputEmail3">
+        </div>
+      </div>
+    <div class="form-group row">
+        <label for="inputEmail3" class="text col-sm-2 col-form-label">Username</label>
+        <div class="col-sm-10">
+          <input type="text" name="username" placeholder="Username" class="form-control" id="inputEmail3">
+        </div>
+      </div>
+    <div class="form-group row">
+      <label for="inputEmail3" class="text col-sm-2 col-form-label">Email</label>
+      <div class="col-sm-10">
+        <input type="email" name="email" placeholder="Email" class="form-control" id="inputEmail3">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputPassword3" class="text col-sm-2 col-form-label">Password</label>
+      <div class="col-sm-10">
+        <input type="password" name="password" placeholder="Password" class="form-control" id="inputPassword3">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputPassword3" class="text col-sm-2 col-form-label">Confirm Password</label>
+      <div class="col-sm-10">
+        <input type="password" name="confirm" placeholder="Password" class="form-control" id="inputPassword3">
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="bc col-sm-10">
+        <button type="submit" class="btn btn-primary">Sign in</button>
+      </div>
+    </>
+  </form>
+{% endblock %}
